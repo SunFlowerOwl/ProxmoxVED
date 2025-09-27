@@ -1,0 +1,35 @@
+{
+  "name": "Redmine",
+  "slug": "redmine",
+  "categories": [
+    20
+  ],
+  "date_created": "2025-09-27",
+  "type": "ct",
+  "updateable": true,
+  "privileged": false,
+  "interface_port": 3000,
+  "documentation": "https://redmine.org/projects/redmine/wiki/",
+  "config_path": "",
+  "website": "https://redmine.org/",
+  "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/redmine.webp",
+  "description": "Redmine is a flexible project management web application. It includes support for multiple projects, issue tracking, Gantt charts, calendars, and role-based access control. Adding Redmine to helper-scripts would give Proxmox users an easy way to deploy a robust project management and issue tracking solution in their homelab or production environments.",
+  "install_methods": [
+    {
+      "type": "default",
+      "script": "ct/redmine.sh",
+      "resources": {
+        "cpu": 1,
+        "ram": 1024,
+        "hdd": 8,
+        "os": "Debian",
+        "version": "12"
+      }
+    }
+  ],
+  "default_credentials": {
+    "username": "admin",
+    "password": "admin"
+  },
+  "notes": []
+}
