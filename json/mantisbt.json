@@ -1,0 +1,44 @@
+{
+  "name": "Mantis BT",
+  "slug": "mantisbt",
+  "categories": [
+    20
+  ],
+  "date_created": "2025-09-13",
+  "type": "ct",
+  "updateable": true,
+  "privileged": false,
+  "interface_port": 80,
+  "documentation": "https://mantisbt.org/documentation.php",
+  "config_path": "",
+  "website": "https://mantisbt.org/",
+  "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/mantisbt.webp",
+  "description": "MantisBT (Mantis Bug Tracker) is an open-source issue tracker that provides a simple and effective solution for managing software development tasks and bugs. This would be a great complement to Gitea and Jenkins, creating a complete development and CI/CD ecosystem.",
+  "install_methods": [
+    {
+      "type": "default",
+      "script": "ct/mantisbt.sh",
+      "resources": {
+        "cpu": 1,
+        "ram": 1024,
+        "hdd": 8,
+        "os": "Debian",
+        "version": "13"
+      }
+    }
+  ],
+  "default_credentials": {
+    "username": "administrator",
+    "password": "root"
+  },
+  "notes": [
+        {
+      "text": "Complet theinstallation script and follow the MantisBT install/upgrade guide to finish configuration. DB credentials saved in ~/mantisbt.creds",
+      "type": "info"
+    },
+    {
+      "text": "This installation uses PostgreSQL as the default database.",
+      "type": "info"
+    }
+  ]
+}
