@@ -40,38 +40,25 @@ $STD apt-get install -y \
 		musl-dev \
 		patch \
 		postgresql-dev \
-		yaml-dev \
+		yaml-dev 
 msg_ok "Installed Dependencies"
 
+PG_VERSION="14" setup_postgresql
+PG_DB_NAME="mantisbt" PG_DB_USER="mantisbt" setup_postgresql_db
 fetch_and_deploy_gh_release "redmine" "redmine/redmine" "tarball" "latest" "/opt/redmine"
 
 RUBY_INSTALL_VERSION=3.4
 RUBY_VERSION=${RUBY_INSTALL_VERSION} RUBY_INSTALL_RAILS="true" setup_ruby
 
-msg_info "Configuring gem"
+msg_info "Configuring Redmine"
 $STD bundle config set --local without 'development test' 
 $STD bundle install
-msg_ok "Configured gem"
-
-msg_info "Setting up Rails"
 $STD bundle exec rake generate_secret_token
-msg_ok "Set up Rails"
-
-msg_info "Adding redmine user"
 addgroup -S -g 1000 redmine && adduser -S -H -G redmine -u 999 redmine
-msg_ok "Added redmine user"
-
-msg_info "Configuring Redmine"
 mkdir -p tmp tmp/pdf public/assets
 sudo chown -R redmine:redmine files log tmp public/assets
 sudo chmod -R 755 files log tmp public/assets
-msg_ok "Configured Redmine"
-
-msg_info "Creating Default Configuration Files"
 cp /opt/redmine/config/database.yml.example /opt/redmine/config/database.yml
-msg_ok "Created Default Configuration Files"
-
-msg_info "Creating Services"
 cat <<EOF >/etc/systemd/system/redmine.service
 [Unit]
 Description=Redmine
@@ -91,7 +78,7 @@ Restart=always
 WantedBy=multi-user.target
 EOF
 systemctl enable -q --now redmine
-msg_ok "Created Services"
+msg_ok "Configured Redmine"
 
 motd_ssh
 customize
